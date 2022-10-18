@@ -1,20 +1,82 @@
 import java.util.Stack;
+
+
 public class HW2_1 {    
     public static void main(String[] args) {
        // just like any problems, whatever you need here, etc.
-    }
+
+       //HW2_1 sol = new HW2_1();
+
+       //Setting up the main method with test inputs
+
+      // Solution sol = new Solution();
+       //sol.canDistribute(new int[]{1}, 2);
+       //sol.canDistribute(new int[]{1,2,2,3,3,5,5}, 12);
+
+       int events_pushed[] = {1,2,3,4};
+       int events_popped[] = {3,4,2,1};
+
+       System.out.println((Solution.isSameEventSequence
+    		(events_pushed, events_popped)));
+
+
+    } 
 }
 
 // FILL OUT THE FOLLOWING API TEMPLATE, WHICH FOLLOWS THE 
 // PURPOSE/PARAMETERS/RETURN VALUES STYLE PER THE SYLLABUS. 
 /**
- * PURPOSE:
- * PARAMETERS:
+ * PURPOSE: The solution method will check if two input integer arrays, events_pushed and events_popped,
+ * represent the result of an actual sequence of events happened on an initially empty stack. 
+ * If so, the solution methods turns true, false otherwise. 
+ * PARAMETERS: 
+ *  int[] events_pushed
+ *  int[] events_popped
  * RETURN VALUES:
+ *  True
+ *  False
  */
 class Solution {
    public boolean isSameEventSequence(int[] events_pushed, int[] events_popped) { 
-    false; 
-    // YOUR CODE HERE 
+
+    Stack<integer> myStack = new Stack<integer>();
+
+    
+       
+    if ((events_popped.length=>1) && (events_popped.length < 100) && (events_pushed.length == events_popped.length)){
+
+        for (int i = 0; i <= events_pushed.length; i++)
+
+        if push i = pop j then pop
+
+        if push i = pop j then push
+
+
+
+
+            Int integer1 = stack1.top();
+            if (integer1.equals(1))
+                System.out.println("Test 34 passed");
+            else
+                System.out.println("Test 34 failed");
+        return true;
+        
+    } 
+
+        else {
+            return false;
+        }
+
+
+
    }
 }
+
+
+
+/**
+ * Solution Notes:
+ * 
+ * 
+ * 
+ */
