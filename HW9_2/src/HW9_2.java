@@ -1,5 +1,6 @@
 import java.util.*;
 
+
 public class HW9_2 {
    public static void main(String[] args) {
       Solution sol = new Solution();
@@ -27,6 +28,7 @@ class Solution {
       // YOUR CODE HERE, IF NEEDED 
 	   
 	   myMap = new HashMap<String,Integer>(); // constructor
+	   
    } 
 
    /**
@@ -47,11 +49,24 @@ class Solution {
    public int getSum(String key) { 
       // YOUR CODE HERE 
 	   
+	   int sum = 0;
 	   
+	   for (var entry : myMap.entrySet()) {
+		    
+		   String hashKey = entry.getKey();
+		   Integer hashValue = entry.getValue();
+		   
+		   if (hashKey.startsWith(key)) {
+			   sum = sum + hashValue;
+		   }
+		    
+		}
 	   
-	   
+	   return sum;	   
    } 
+   
 }
+
 /*
 *Constraints and Assumptions
 -You are allowed to use any data structures via import java.util.* for this problem.
