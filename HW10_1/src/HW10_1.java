@@ -35,6 +35,7 @@ public class HW10_1 {
    }
 } 
 
+
 class Solution {
    ArrayList<Integer> list;
    public Solution(ArrayList<Integer> list) {
