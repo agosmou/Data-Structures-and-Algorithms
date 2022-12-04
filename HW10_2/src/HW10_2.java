@@ -10,21 +10,21 @@ public class HW10_2 {
       int[] output = sol.getN(new int[]{1,2,3,4,5,6}, 3);
 
       // You may use this approach to print your output to console to validate
-      System.out.println("[2,3,6], [1,2,3], [4,5,6], etc. => "+Arrays.toString(output)); // combination of any 3 input integers
+      System.out.println("[2,3,6], [1,2,3], [4,5,6], etc. => "+Arrays.toString(output)+"\n"); // combination of any 3 input integers
                                                    // [2,3,6], [1,2,3], [4,5,6], etc. 
 
       // If you wish to repeat with a different test case, you may as follows:
       output = sol.getN(new int[]{1,1,1,2,2,3,3,3,3,3,3,4,4,4,4,4,4,4,4,5,5,6}, 3);
-      System.out.println("[6,5,2] in any order => "+Arrays.toString(output)); // [6,5,2] or them 3 in any order
+      System.out.println("[6,5,2] in any order => "+Arrays.toString(output)+"\n"); // [6,5,2] or them 3 in any order
       
       output = sol.getN(new int[]{1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2}, 1);
-      System.out.println("[2] => "+Arrays.toString(output)); // [2]       
+      System.out.println("[2] => "+Arrays.toString(output)+"\n"); // [2]       
       
       output = sol.getN(new int[]{1}, 1);
-      System.out.println("[1] => "+Arrays.toString(output)); // [1]  
+      System.out.println("[1] => "+Arrays.toString(output)+"\n"); // [1]  
       
       output = sol.getN(new int[]{11,12,1,2,10,100}, 3);
-      System.out.println("Any combination of 3 from array => "+Arrays.toString(output)); // Any combination of 3 from array 
+      System.out.println("Any combination of 3 from array => "+Arrays.toString(output)+"\n"); // Any combination of 3 from array 
    }
 } 
 
@@ -54,18 +54,64 @@ class Solution {
 	    */
 	   
 	   
+	   // no duplicate keys!
+	   //key is the element
+	   //value is the number of ocurrences 
+	   Map<Integer,Integer> hMap = new HashMap<Integer,Integer>();
 	   
-	   Map<Integer,Integer> hash = new HashMap<Integer,Integer>();
-	   
-	   // am experiment - try printing hashmap
+	   Queue<Integer> q = new PriorityQueue<Integer>();
 	   
 	   int size = input.length;
 	   
-	   int i = 1;
-	   int j = 1;
-	   int k = 1;
+	   int count = 0;
+	   // am experiment - try printing hashmap
 	   
-	   return new int[] {i,j,k};
+	   int aptr=0; // initialize pointers
+	   int bptr=0;
+	   
+	   boolean [] visited = new boolean[size]; /// initialize boolean array to track visited elements
+	   Arrays.fill(visited, false); // fill array with false to use in test boolean condition
+	   
+	   for(int i = 0; i<size;i++) {
+		   
+		   if (visited[i]==true) {
+			   continue;
+		   }
+		   
+		   count = 1;
+		   
+		   for(int j=i+1;j<size;j++) {
+			   
+			   if(input[i]==input[j]) {
+				   visited[j] = true;
+				   count++;
+			   }
+				   
+		   }
+		   
+		   hMap.put(input[i], count);
+		   
+	   }
+	   
+	   System.out.println(hMap);
+	   //for loop
+	   //	key = x
+	   //	value = y
+	   //	hash.put(x,y)
+	   
+	   
+	   
+	   //place holder
+	   int[] arr = {0};
+	   return arr;
+
+	   
+	   /////idea 1
+//	   int i = q.get(0);
+//	   int j = q.get(1);
+//	   int k = q.get(2);
+//	   
+//	   return new int[] {i,j,k};
 	   
    }
 }
