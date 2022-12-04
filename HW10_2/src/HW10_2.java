@@ -52,22 +52,23 @@ class Solution {
 	    * For example: [1,1,2,2,3,3,4,4] and N=2. 
 	    * In this case, your output array of size 2 can be any combination of these integers.
 	    */
+
+
 	   
+	   
+/*
+* PART 1: hashMap to heap
+*/
 	   
 	   // no duplicate keys!
-	   //key is the element
-	   //value is the number of ocurrences 
+	   //key is the element & value is the number of occurrences 
 	   Map<Integer,Integer> hMap = new HashMap<Integer,Integer>();
 	   
-	   Queue<Integer> q = new PriorityQueue<Integer>();
+
 	   
 	   int size = input.length;
 	   
 	   int count = 0;
-	   // am experiment - try printing hashmap
-	   
-	   int aptr=0; // initialize pointers
-	   int bptr=0;
 	   
 	   boolean [] visited = new boolean[size]; /// initialize boolean array to track visited elements
 	   Arrays.fill(visited, false); // fill array with false to use in test boolean condition
@@ -85,28 +86,24 @@ class Solution {
 			   if(input[i]==input[j]) {
 				   visited[j] = true;
 				   count++;
-			   }
-				   
-		   }
-		   
-		   hMap.put(input[i], count);
-		   
+			   }			   
+		   }		   
+		   hMap.put(input[i], count);		   
 	   }
 	   
 	   System.out.println(hMap);
-	   //for loop
-	   //	key = x
-	   //	value = y
-	   //	hash.put(x,y)
+/*
+ * PART 2: hashMap to heap
+ */
 	   
+	   Queue<Integer> q = new PriorityQueue<Integer>();
 	   
-	   
-	   //place holder
+	   //place holder to compile during testing
 	   int[] arr = {0};
 	   return arr;
 
 	   
-	   /////idea 1
+	   /////brainstorm idea for printing solution 
 //	   int i = q.get(0);
 //	   int j = q.get(1);
 //	   int k = q.get(2);
