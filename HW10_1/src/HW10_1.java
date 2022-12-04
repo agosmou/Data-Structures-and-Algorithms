@@ -17,27 +17,27 @@ public class HW10_1 {
       // First, take the above array representation of the 
       // input heap and convert it into an ArrayList 
       // instance via the following:
-      ArrayList<Integer> list = new ArrayList<>(Arrays.asList(5,4,3,2,1));
+	   ArrayList<Integer> list = new ArrayList<>(Arrays.asList(5,4,3,2,1));
 
-      // Then, create an instance of solution by passing 
-      // this list in. Note this solution class is basically
-      // a heap wrapper, using ArrayList as its buffer to store/manipulate data.
-      Solution sol = new Solution(list);
+	      // Then, create an instance of solution by passing 
+	      // this list in. Note this solution class is basically
+	      // a heap wrapper, using ArrayList as its buffer to store/manipulate data.
+	      Solution sol = new Solution(list);
 
-      // Test the operations: enqueue(element) & dequeue(). You may use print() to 
-      // display your ArrayList instance in String. 
-      sol.enqueue(6);
-      System.out.println("[6,4,5,2,1,3] => "+sol.print());      // [6,4,5,2,1,3]
-      
-//      sol.enqueue(7);
-//      System.out.println("[7,4,6,2,1,3,5] => "+sol.print());      // [7,4,6,2,1,3,5]
-      
-      
-      sol.dequeue();    										// [5,4,3,2,1]
-      System.out.println("[5,4,3,2,1] => "+sol.print());
-      //sol.enqueue(5);   
-      //System.out.println("[5,4,5,2,1,3] => "+sol.print());      // [5,4,5,2,1,3]
-      // etc.
+	      // Test the operations: enqueue(element) & dequeue(). You may use print() to 
+	      // display your ArrayList instance in String. 
+	      sol.enqueue(6);
+	      System.out.println("[6,4,5,2,1,3] => "+sol.print());      // [6,4,5,2,1,3]
+	      
+//	      sol.enqueue(7);
+//	      System.out.println("[7,4,6,2,1,3,5] => "+sol.print());      // [7,4,6,2,1,3,5]
+	      
+	      
+	      sol.dequeue();    										// [5,4,3,2,1]
+	      System.out.println("[5,4,3,2,1] => "+sol.print());
+	      sol.enqueue(5);   
+	      System.out.println("[5,4,5,2,1,3] => "+sol.print());      // [5,4,5,2,1,3]
+	      // etc.
    }
 } 
 
@@ -117,7 +117,7 @@ class Solution {
 	   list.set(0, list.get(lastIndex));
 	   list.remove(lastIndex);
 	   reheapDown(list.get(0)); // recursive call starting from root, working down
-
+	   lastIndex --;
    }
    
 
@@ -171,52 +171,62 @@ class Solution {
    private void reheapDown(int x) {
       // YOUR CODE HERE - THIS METHOD IS ONLY
       // CALLED BY DEQUEUE()
-	   
-//	   //check that the node have children before calculating the indices
-//	   
-//	   // if right child exists - array index should be less than list size
-//	   if(((nodeIndex*2)+2) < list.size()) {
-//		   
-//	   }
-//	   
-//	   // if left child exists
-//	   if(((nodeIndex*2)+1) < list.size()) {
-//		   
-//	   }
+	  // NOTE: This exercise could not create the children and then recurse through because on a complete tree structure, the get method would cause an error when pulling a value from an index thats out of bounds
+	  // thus, various conditions had to be checked 
 	   
 	   
-	   int rightIndex = (nodeIndex*2)+2;
+	   int leftIndex = (nodeIndex*2) + 1;   
+	   int rightIndex = (nodeIndex*2) + 2;
 	   
-	   		int rightChild = list.get(rightIndex);
+
 	   
-	   int leftIndex = (nodeIndex*2) + 1;
-	   
-	   		int leftChild = list.get(leftIndex);
-	   
-	   if(x < leftChild || x < rightChild) { // root element, x, must be smaller that either of its children to switch
+	   // if left child exists - right will be nested in this loop because of heap fill behavior. ie you either have a complete or full binary tree filled left to right.
+	   if(leftIndex < list.size()) {
 		   
-		   // compare children
-		   if(leftChild < rightChild) { // switch with right child
+	   	   int leftChild = list.get(leftIndex);
+		   
+	   	   // this conditions tests if the binary tree is complete - ie there is no right-most node, but there is a left.
+		   if(leftChild > list.get(nodeIndex) && rightIndex >= list.size()) { // switch with left child
+		   
+		   list.set(leftIndex, x);
+		   list.set(nodeIndex, leftChild);
+		   nodeIndex = leftIndex;			   
+		   
+	      }
+		   
+		   // if right child exists - array index should be less than list size
+		   if(rightIndex < list.size()) {
 			   
-			   list.set(rightIndex, x);
-			   list.set(nodeIndex, rightChild);
-			   nodeIndex = rightIndex;
-		   }
-		   
-		   if(leftChild > rightChild) { // switch with left child
+			   //int leftChild = list.get(leftIndex);
+		   	   int rightChild = list.get(rightIndex);
+		   	   
+			   if(x >= leftChild && x >= rightChild) { // root element, x, must be smaller that either of its children to switch
+				   return;
+			   }
+		   	   
+			   // compare children
+			   if(leftChild < rightChild) { // switch with right child
+				   
+				   list.set(rightIndex, x);
+				   list.set(nodeIndex, rightChild);
+				   nodeIndex = rightIndex;
+			   }
 			   
-			   list.set(leftIndex, x);
-			   list.set(nodeIndex, leftChild);
-			   nodeIndex = leftIndex;
+			   if(leftChild > rightChild) { // switch with left child
+				   
+				   list.set(leftIndex, x);
+				   list.set(nodeIndex, leftChild);
+				   nodeIndex = leftIndex;
+			   }
+			   
+			   
+			// recursive call only if new nodeIndex has any new children left
+			   if(((nodeIndex*2)+2) < list.size() || ((nodeIndex*2)+1) < list.size()) 		      			{
+			      reheapDown(x);
+			    }   
 		   }
-		   
-		   // recursive call only if new nodeIndex has any children left
-		   if(((nodeIndex*2)+2) < list.size() || ((nodeIndex*2)+1) < list.size()) {
-		   reheapDown(x);
-		   }
-	   }
-	   
-	   return;
+	 }  
+
    }
 
 }
@@ -230,4 +240,3 @@ class Solution {
 -sol.print() returns [] for an empty list.
  *
  */
- 

@@ -30,5 +30,9 @@ class Solution {
    */ 
    public int[] getN(int[] input, int N) {
       // YOUR CODE HERE 
+	   
+	   Map<Integer,Integer> hash = new HashMap<Integer,Integer>();
+	   
+	   
    }
 }
