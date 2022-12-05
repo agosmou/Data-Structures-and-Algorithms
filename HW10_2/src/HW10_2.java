@@ -33,9 +33,9 @@ class Solution {
    // YOU MAY ADD ANY ADDITIONAL METHODS, VARIABLES, ETC., HERE
   
    /**
-   * PURPOSE: 
-   * PARAMETERS: 
-   * RETURN VALUES:
+   * PURPOSE: Find the first N least frequently occurring integers in the input array
+   * PARAMETERS: the input array and the int N from the main method
+   * RETURN VALUES: return will be an int array of the N least recurring elements
    */ 
    public int[] getN(int[] input, int N) {
       // YOUR CODE HERE 
@@ -58,68 +58,65 @@ class Solution {
 	   
 /*
 * PART 1: array to hashmap
+* No duplicate keys!
+* Key is the element & value is the number of occurrences
 */
 	   
 	   // no duplicate keys!
 	   //key is the element & value is the number of occurrences 
+	   
+	   // initialize map
 	   Map<Integer,Integer> hMap = new HashMap<Integer,Integer>();
-	   
-
-	   
-	   int size = input.length;
+	   	   
+	   int size = input.length; // store map size
 	   
 	   for (int i =0; i<size;i++) {
 		   
 		   if (hMap.containsKey(input[i])) {
-			   hMap.put(input[i], hMap.get(input[i])+1);
+			   hMap.put(input[i], hMap.get(input[i])+1);// adding the additional number of occurrences
 		   }
 		   else {
-			   hMap.put(input[i], 1);
+			   hMap.put(input[i], 1); // upon first iteration, the condition will always hit the else statement; thus, filling the map with the initial quantities
 		   }
 	   }
 	   
 	   //debugging print
-	   System.out.println(hMap);
+	   //System.out.println(hMap);
 	   
 
 /*
  * PART 2: hashMap to heap
  */
-	   
+	   // create heap
 	   PriorityQueue<Integer> heap = new PriorityQueue<Integer>();
 	   
-	   int rem = hMap.size() - N; // create variable to store the amount of large elemtns to remove
+	   int rem = hMap.size() - N; // create variable to store the amount of large elements to remove
 	   
-	   // remove "rem" amount of large items from the map
-       hMap.values().stream().sorted(Comparator.reverseOrder()).limit(rem).forEach(hMap.values()::remove); 
+	   // remove "rem" amount of large items from the map using stream
+       hMap.values().stream()
+       .sorted(Comparator.reverseOrder()) // originally sorted in natural order, ie ascending, so it must be reversed 
+       .limit(rem)  // limit removal to only "rem" number of items
+       .forEach(hMap.values()::remove); // iterate over the collection and remove each element iterated using "method reference"- limited to "rem" number
 	   
 	   // create heap size N
 	   hMap.forEach((k,v) -> heap.add(k));
 	   
 	   
 	   // debugging print
-	   System.out.println("this is the heap " + heap);
+	   //System.out.println("this is the heap " + heap);
 
 /*
 * PART 3: heap to array result
+* heap.toArray() gave troubles because of the interference between Object[] and int[] types
 */	   
 	   
+	   int[] heapArray = new int[N]; // create int[] array to return result
 	   
-	   // this should work to return the answer
-	   //return heap.toArray();
+	   for (int i =0; i<N; i++)	{ // iterate N number of times
+		  heapArray[i] = heap.poll(); // remove the head of the heap and add it into the array
+	   }
 	   
-	   //place holder to compile during testing
-	    //return heap.toArray(int[] newArray);
-	   int[] arr = {0};
-	   return arr;
-
-	   
-	   /////brainstorm idea for printing solution 
-//	   int i = q.get(0);
-//	   int j = q.get(1);
-//	   int k = q.get(2);
-//	   
-//	   return new int[] {i,j,k};
+	   return heapArray; // return result
 	   
    }
 }
