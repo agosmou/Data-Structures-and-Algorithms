@@ -57,7 +57,7 @@ class Solution {
 	   
 	   
 /*
-* PART 1: hashMap to heap
+* PART 1: array to hashmap
 */
 	   
 	   // no duplicate keys!
@@ -68,37 +68,48 @@ class Solution {
 	   
 	   int size = input.length;
 	   
-	   int count = 0;
-	   
-	   boolean [] visited = new boolean[size]; /// initialize boolean array to track visited elements
-	   Arrays.fill(visited, false); // fill array with false to use in test boolean condition
-	   
-	   for(int i = 0; i<size;i++) {
+	   for (int i =0; i<size;i++) {
 		   
-		   if (visited[i]==true) {
-			   continue;
+		   if (hMap.containsKey(input[i])) {
+			   hMap.put(input[i], hMap.get(input[i])+1);
 		   }
-		   
-		   count = 1;
-		   
-		   for(int j=i+1;j<size;j++) {
-			   
-			   if(input[i]==input[j]) {
-				   visited[j] = true;
-				   count++;
-			   }			   
-		   }		   
-		   hMap.put(input[i], count);		   
+		   else {
+			   hMap.put(input[i], 1);
+		   }
 	   }
 	   
+	   //debugging print
 	   System.out.println(hMap);
+	   
+
 /*
  * PART 2: hashMap to heap
  */
 	   
-	   Queue<Integer> q = new PriorityQueue<Integer>();
+	   PriorityQueue<Integer> heap = new PriorityQueue<Integer>();
+	   
+	   int rem = hMap.size() - N; // create variable to store the amount of large elemtns to remove
+	   
+	   // remove "rem" amount of large items from the map
+       hMap.values().stream().sorted(Comparator.reverseOrder()).limit(rem).forEach(hMap.values()::remove); 
+	   
+	   // create heap size N
+	   hMap.forEach((k,v) -> heap.add(k));
+	   
+	   
+	   // debugging print
+	   System.out.println("this is the heap " + heap);
+
+/*
+* PART 3: heap to array result
+*/	   
+	   
+	   
+	   // this should work to return the answer
+	   //return heap.toArray();
 	   
 	   //place holder to compile during testing
+	    //return heap.toArray(int[] newArray);
 	   int[] arr = {0};
 	   return arr;
 
