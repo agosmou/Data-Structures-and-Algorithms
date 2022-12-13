@@ -4,14 +4,14 @@ public class HW4_1 {
    public static void main(String[] args) {
       // your solution will be tested as such, sequentially with random input
       Solution sol = new Solution();
-      System.out.println("false-"+ sol.canDistribute(new int[]{1}, 2)); // false
-      System.out.println("false-"+ sol.canDistribute(new int[]{1,2,2,3,3,5,5}, 12)); // false
-      System.out.println("true-"+ sol.canDistribute(new int[]{3,4,5,6}, 2)); // true
-      System.out.println("false-"+ sol.canDistribute(new int[]{3,4,5,6}, 3)); // false
-      System.out.println("true-"+ sol.canDistribute(new int[]{5,4,5,4}, 2)); // true
-      System.out.println("true-"+ sol.canDistribute(new int[]{1}, 1)); // true
-      System.out.println("true-"+ sol.canDistribute(new int[]{1,3,2,3,4,1,3,5,2,1}, 5)); // true 
-      System.out.println("false-"+ sol.canDistribute(new int[]{1}, 4)); // false
+      //System.out.println("false-"+ sol.canDistribute(new int[]{1}, 2)); // false
+      System.out.println("false-"+ sol.canDistribute(new int[]{1, 3, 2, 3, 3, 2}, 3)); // false
+      //System.out.println("true-"+ sol.canDistribute(new int[]{3,4,5,6}, 2)); // true
+      //System.out.println("false-"+ sol.canDistribute(new int[]{3,4,5,6}, 3)); // false
+      //System.out.println("true-"+ sol.canDistribute(new int[]{5,4,5,4}, 2)); // true
+      //System.out.println("true-"+ sol.canDistribute(new int[]{1}, 1)); // true
+      //System.out.println("true-"+ sol.canDistribute(new int[]{1,3,2,3,4,1,3,5,2,1}, 5)); // true 
+      //System.out.println("false-"+ sol.canDistribute(new int[]{1}, 4)); // false
         
    }
 }
